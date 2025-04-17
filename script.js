@@ -45,22 +45,30 @@ window.onload = () => {
   
     // I added more below to support touch from mobile devices
 
-    canvas.addEventListener("touchstart", (e) => {
-      e.preventDefault();
+    canvas.addEventListener('touchstart', (e) => {
+      e.preventDefault(); // Stop screen from scrolling
+      painting = true;
       const touch = e.touches[0];
-      startDraw({ clientX: touch.clientX, clientY: touch.clientY });
+      ctx.beginPath();
+      ctx.moveTo(touch.clientX, touch.clientY);
+    }, { passive: false });
+    
+    canvas.addEventListener('touchend', () => {
+      painting = false;
+      ctx.beginPath();
     });
     
-    canvas.addEventListener("touchmove", (e) => {
-      e.preventDefault();
-      const touch = e.touches[0];
-      draw({ clientX: touch.clientX, clientY: touch.clientY });
+    canvas.addEventListener('touchcancel', () => {
+      painting = false;
+      ctx.beginPath();
     });
     
-    canvas.addEventListener("touchend", (e) => {
+    canvas.addEventListener('touchmove', (e) => {
       e.preventDefault();
-      stopDraw();
-    });
+      if (!painting) return;
+      const touch = e.touches[0];
+      drawTouch(touch.clientX, touch.clientY);
+    }, { passive: false });
     
     function draw(e) {
       if (!painting) return;
@@ -78,6 +86,15 @@ window.onload = () => {
       ctx.stroke();
       ctx.beginPath(); // Prevent connecting lines between strokes
       ctx.moveTo(e.clientX, e.clientY);
+    }
+    
+    function drawTouch(x, y) {
+      ctx.lineWidth = brushSize;
+      ctx.lineCap = "round";
+      ctx.strokeStyle = brushColor;
+    
+      ctx.lineTo(x, y);
+      ctx.stroke();
     }
   
     function hexToRGBA(hex, opacity) {
