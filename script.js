@@ -43,6 +43,25 @@ window.onload = () => {
   
     canvas.addEventListener('mousemove', draw);
   
+    // I added more below to support touch from mobile devices
+
+    canvas.addEventListener("touchstart", (e) => {
+      e.preventDefault();
+      const touch = e.touches[0];
+      startDraw({ clientX: touch.clientX, clientY: touch.clientY });
+    });
+    
+    canvas.addEventListener("touchmove", (e) => {
+      e.preventDefault();
+      const touch = e.touches[0];
+      draw({ clientX: touch.clientX, clientY: touch.clientY });
+    });
+    
+    canvas.addEventListener("touchend", (e) => {
+      e.preventDefault();
+      stopDraw();
+    });
+    
     function draw(e) {
       if (!painting) return;
   

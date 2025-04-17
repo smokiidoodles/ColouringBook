@@ -36,6 +36,8 @@ body, html {
     position: absolute;
     top: 0;
     left: 50%;
+    max-width: 90vw;
+    font-size: 6vw;
     transform: translateX(-50%);
     margin-top: 20px;
     font-size: 2.5rem;
@@ -63,6 +65,9 @@ button , input {
 
     display: flex;
     flex-wrap: wrap;
+    gap: 8px;
+    padding: 10px 15px;
+    max-width: 95vw;
     justify-content: center; 
     align-items: center;
     gap: 12px;
@@ -85,6 +90,7 @@ canvas {
   position: absolute;
   top: 0;
   left: 0;
+  touch-action: none;
 }
 
 
