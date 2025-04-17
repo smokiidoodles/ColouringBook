@@ -74,6 +74,7 @@ button , input {
     padding: 20px 30px;
   
     background: rgba(255, 255, 255, 0.95);
+
   
   
 
@@ -144,6 +145,7 @@ canvas {
     .toolbar button {
       font-size: 0.75rem;
       padding: 4px 8px;
+      border-color: black ;
       min-width: 50px;
       flex: 1 1 auto;
     }
