@@ -53,8 +53,10 @@ button , input {
     border-radius: 10px;
     border-color: black;
     border-width: 2px;
-    background-color: #FFFFFF;
     font-weight: bold;
+}
+input{
+  background-color: rgb(130, 127, 127);
 }
 
 .toolbar {
@@ -151,6 +153,10 @@ canvas {
       border-width: 2px;
       min-width: 50px;
       flex: 1 1 auto;
+    }
+
+    input{
+      background-color: rgb(130, 127, 127);
     }
   }
   
