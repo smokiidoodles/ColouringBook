@@ -127,3 +127,25 @@ canvas {
     }
   }
   
+  @media (max-width: 600px) {
+    #appTitle {
+      font-size: 6vw; /* shrink title a bit */
+      margin-top: 10px;
+    }
+  
+    .toolbar {
+      flex-wrap: wrap;
+      gap: 6px;
+      padding: 6px 10px;
+      max-width: 95vw;
+    }
+  
+    .toolbar input,
+    .toolbar button {
+      font-size: 0.75rem;
+      padding: 4px 8px;
+      min-width: 50px;
+      flex: 1 1 auto;
+    }
+  }
+  
