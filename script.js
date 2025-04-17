@@ -11,7 +11,15 @@ window.onload = () => {
     const canvasColor = document.getElementById('canvasColor');
     const clearBtn = document.getElementById('clearBtn');
     const saveBtn = document.getElementById('saveBtn');
-  
+
+    brushSize.addEventListener("input", (e) => {
+      ctx.lineWidth = e.target.value;
+    });
+    
+    brushOpacity.addEventListener("input", (e) => {
+      ctx.globalAlpha = e.target.value;
+    });
+    
     // eraser toggle button
     const eraserBtn = document.createElement("button");
     eraserBtn.id = "eraserBtn";
@@ -70,32 +78,40 @@ window.onload = () => {
       drawTouch(touch.clientX, touch.clientY);
     }, { passive: false });
     
-    function draw(e) {
-      if (!painting) return;
+  function draw(e) {
+    if (!painting) return;
   
       ctx.lineWidth = brushSize.value;
       ctx.lineCap = 'round';
   
+    if (erasing) {
+        ctx.strokeStyle = canvasColor.value;
+    } else {
+      ctx.strokeStyle = hexToRGBA(brushColor.value, brushOpacity.value);
+    }
+  
+    ctx.lineTo(e.clientX, e.clientY);
+    ctx.stroke();
+    ctx.beginPath(); // Prevent connecting lines between strokes
+    ctx.moveTo(e.clientX, e.clientY);
+    }
+
+    function drawTouch(x, y) {
+      ctx.lineWidth = brushSize.value;
+      ctx.lineCap = 'round';
+
       if (erasing) {
         ctx.strokeStyle = canvasColor.value;
       } else {
         ctx.strokeStyle = hexToRGBA(brushColor.value, brushOpacity.value);
       }
-  
-      ctx.lineTo(e.clientX, e.clientY);
-      ctx.stroke();
-      ctx.beginPath(); // Prevent connecting lines between strokes
-      ctx.moveTo(e.clientX, e.clientY);
-    }
-    
-    function drawTouch(x, y) {
-      ctx.lineWidth = brushSize;
-      ctx.lineCap = "round";
-      ctx.strokeStyle = brushColor;
-    
-      ctx.lineTo(x, y);
-      ctx.stroke();
-    }
+
+    ctx.lineTo(x, y);
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(x, y);
+}
+
   
     function hexToRGBA(hex, opacity) {
       let r = parseInt(hex.slice(1, 3), 16);
