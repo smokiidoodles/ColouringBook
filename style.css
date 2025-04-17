@@ -82,7 +82,7 @@ button , input {
 
     backdrop-filter: blur(10px);
     border: 2px dashed transparent;
-    border-image: linear-gradient(60deg, #ff6ec4, #4ade80, #f87171) 1;
+    border-image: linear-gradient(60deg, #60344e, #460875, #ab4c88) 1;
     box-shadow: 0 0 20px 5px rgba(255, 105, 180, 0.2);
 
       
@@ -132,7 +132,7 @@ canvas {
   
   @media (max-width: 600px) {
     #appTitle {
-      font-size: 6vw; /* shrink title a bit */
+      font-size: 6vw; 
       margin-top: 10px;
     }
   
@@ -143,8 +143,8 @@ canvas {
       max-width: 95vw;
     }
   
-    .toolbar input,
-    .toolbar button {
+    input,
+    button {
       font-size: 0.75rem;
       padding: 4px 8px;
       border-color: black;
